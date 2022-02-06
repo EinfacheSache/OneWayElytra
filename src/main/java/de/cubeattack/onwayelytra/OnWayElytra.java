@@ -4,6 +4,7 @@ import de.cubeattack.onwayelytra.listeners.JoinListener;
 import de.cubeattack.onwayelytra.listeners.PlayerChangeWorld;
 import de.cubeattack.onwayelytra.listeners.PlayerInteract;
 import de.cubeattack.onwayelytra.listeners.PlayerMove;
+import de.cubeattack.onwayelytra.utils.ErrorHandel;
 import de.cubeattack.onwayelytra.utils.FileUtils;
 import de.cubeattack.onwayelytra.utils.Settings;
 import org.bukkit.Bukkit;
@@ -21,11 +22,12 @@ public class OnWayElytra extends JavaPlugin {
     private static final String PREFIX = "§7[§bCube§7] ";
 
     private static Settings settings;
+    private static OnWayElytra plugin;
 
     @Override
     public void onLoad() {
+        plugin = this;
         settings = new Settings();
-        FileUtils.copyToFile(Objects.requireNonNull(this.getResource("config.yml")));
     }
 
     @Override
@@ -54,5 +56,9 @@ public class OnWayElytra extends JavaPlugin {
 
     public static String getPREFIX() {
         return PREFIX;
+    }
+
+    public static OnWayElytra getPlugin() {
+        return plugin;
     }
 }

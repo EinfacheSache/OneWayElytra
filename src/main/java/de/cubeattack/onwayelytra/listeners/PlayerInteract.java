@@ -12,8 +12,9 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.Objects;
 
+import static de.cubeattack.onwayelytra.OnWayElytra.getSettings;
 
-public class PlayerInteract extends OnWayElytra implements Listener {
+public class PlayerInteract implements Listener {
 
     public static double x;
     public static double y;

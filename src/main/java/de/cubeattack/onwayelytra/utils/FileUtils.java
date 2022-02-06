@@ -1,20 +1,16 @@
 package de.cubeattack.onwayelytra.utils;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 import static org.apache.commons.io.IOUtils.DEFAULT_BUFFER_SIZE;
 
 public class FileUtils {
 
+    private static final YamlConfiguration yamlConfiguration = new YamlConfiguration();
     private static final File file = new File("plugins//Elytra//config.yml");
-    private static final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
-    public static void copyToFile(InputStream inputStream) {
+    public static void copyToFile(InputStream inputStream){
         try {
             if (!file.exists()) {
                 yamlConfiguration.save(file);
@@ -27,10 +23,13 @@ public class FileUtils {
                 }
             }
         }catch (IOException exception){
-            exception.printStackTrace();
+            System.out.println("Test1");
         }
     }
     public static YamlConfiguration getYamlConfiguration() {
         return yamlConfiguration;
+    }
+    public static File getFile() {
+        return file;
     }
 }

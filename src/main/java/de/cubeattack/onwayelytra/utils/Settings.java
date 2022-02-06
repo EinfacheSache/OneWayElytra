@@ -1,7 +1,6 @@
 package de.cubeattack.onwayelytra.utils;
 
-import org.bukkit.Bukkit;
-import org.bukkit.World;
+import de.cubeattack.onwayelytra.OnWayElytra;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.Objects;
@@ -9,7 +8,7 @@ import java.util.Objects;
 public class Settings {
 
     private final boolean UseWorldSpawn;
-    private final boolean inWorldActive;
+    private final boolean inWorldIsActive;
     private final boolean inNetherActive;
     private final boolean inEndActive;
     private final Double radius;
@@ -18,10 +17,11 @@ public class Settings {
     private final Double z;
 
     public Settings(){
+        ErrorHandel.checkConfigHasError(FileUtils.getFile());
+        FileUtils.copyToFile(Objects.requireNonNull(OnWayElytra.getPlugin().getResource("config.yml")));
         YamlConfiguration config = FileUtils.getYamlConfiguration();
-
         this.UseWorldSpawn = config.getBoolean("UseWorldSpawn");
-        this.inWorldActive = config.getBoolean("ActiveWorlds.World");
+        this.inWorldIsActive = config.getBoolean("ActiveWorlds.World");
         this.inNetherActive = config.getBoolean("ActiveWorlds.Nether");
         this.inEndActive = config.getBoolean("ActiveWorlds.End");
         this.radius = config.getDouble("Radius");
@@ -34,8 +34,8 @@ public class Settings {
         return UseWorldSpawn;
     }
 
-    public boolean isInWorldActive() {
-        return inWorldActive;
+    public boolean isInWorldIsActive() {
+        return inWorldIsActive;
     }
 
     public boolean isInNetherActive() {
