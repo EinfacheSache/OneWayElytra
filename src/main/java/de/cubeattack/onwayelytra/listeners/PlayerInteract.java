@@ -3,27 +3,18 @@ package de.cubeattack.onwayelytra.listeners;
 import de.cubeattack.onwayelytra.OnWayElytra;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.WeatherType;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Objects;
 
 public class PlayerInteract implements Listener {
-
-    public static double x;
-    public static double y;
-    public static double z;
 
     @EventHandler
     public static void onPlayerInteract(PlayerInteractEvent e){
@@ -50,16 +41,13 @@ public class PlayerInteract implements Listener {
     }
 
     private static void blockTrident(Player player, ItemStack item){
-        Bukkit.getScheduler().runTaskLater(OnWayElytra.getPlugin(), new Runnable()  {
-            @Override
-            public void run() {
-                PlayerInventory playerInventory = player.getInventory();
-                player.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
-                if (playerInventory.getItemInMainHand().getType().equals(Material.AIR)) {
-                    playerInventory.setItemInMainHand(item);
-                } else {
-                    playerInventory.setItemInOffHand(item);
-                }
+        Bukkit.getScheduler().runTaskLater(OnWayElytra.getPlugin(), () -> {
+            PlayerInventory playerInventory = player.getInventory();
+            player.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+            if (playerInventory.getItemInMainHand().getType().equals(Material.AIR)) {
+                playerInventory.setItemInMainHand(item);
+            } else {
+                playerInventory.setItemInOffHand(item);
             }
         }, 1);
     }
