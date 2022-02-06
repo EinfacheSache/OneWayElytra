@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.Objects;
+
 public class PlayerMove implements Listener {
 
     @EventHandler
@@ -19,7 +21,7 @@ public class PlayerMove implements Listener {
             if(inv.getChestplate() == null){
                 inv.setChestplate(ItemCreator.getElytra());
             }else{
-                if(e.getPlayer().getInventory().getChestplate().getType() != Material.ELYTRA) {
+                if(Objects.requireNonNull(e.getPlayer().getInventory().getChestplate()).getType() != Material.ELYTRA) {
                     for (int i = 0; i < 36; i++) {
                         if (inv.getItem(i) == null) {
                             inv.setItem(i, inv.getChestplate());
@@ -34,7 +36,7 @@ public class PlayerMove implements Listener {
             }
         }else{
             if(inv.getChestplate() != null){
-                if(inv.getChestplate().getItemMeta().getDisplayName().contains("Einweg Elytra")){
+                if(Objects.requireNonNull(inv.getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
                     Player p = e.getPlayer();
                     if(!e.getPlayer().isGliding()){
                         if (p.getLocation().add(0.0D, -1.0D, 0.0D).getBlock().getType() != Material.AIR) {

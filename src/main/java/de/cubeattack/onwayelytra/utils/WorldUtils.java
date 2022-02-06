@@ -9,16 +9,14 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public class WorldUtils {
+public class WorldUtils extends OnWayElytra {
 
-    private static final YamlConfiguration Config = FileUtils.yamlConfiguration;
+    private static final YamlConfiguration Config = FileUtils.getYamlConfiguration();
+    private static final double radius = getSettings().getRadius();
 
     public static boolean CheckLocation(Player p){
-        double radius = Config.getDouble("Radius");
-        World world = Bukkit.getWorld(Objects.requireNonNull(Config.getString("SpawnLocation.WorldName")));
-        if(Config.getBoolean("UseWorldSpawn")) {
-            if (OnWayElytra.getPlugin().getServer().getWorld("world") == null) return false;
-            Location location = Objects.requireNonNull(OnWayElytra.getPlugin().getServer().getWorld("world")).getSpawnLocation();
+        if(getSettings().isUseWorldSpawn()) {
+            Location location = Objects.requireNonNull(p.getWorld().getSpawnLocation());
             double x = location.getX();
             double y = location.getY();
             double z = location.getZ();
@@ -28,10 +26,10 @@ public class WorldUtils {
                 }
             }
         }else {
-            double x = Config.getDouble("SpawnLocation.X");
-            double y = Config.getDouble("SpawnLocation.Y");
-            double z = Config.getDouble("SpawnLocation.Z");
-            if(p.getWorld().getName().equals(world.getName())) {
+            double x = getSettings().getX();
+            double y = getSettings().getY();
+            double z = getSettings().getZ();
+            if(isActiveInWorld(p.getWorld().getName())) {
                 if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x + -radius) {
                     if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z + -radius) {
                         return p.getLocation().getY() >= y - radius;
@@ -39,6 +37,15 @@ public class WorldUtils {
                 }
             }
         }
+        return false;
+    }
+
+    public static boolean isActiveInWorld(String worldName) {
+        try {
+            if(getSettings().isInWorldActive() && worldName.equalsIgnoreCase("world"))return true;
+            if(getSettings().isInNetherActive() && worldName.equalsIgnoreCase("nether"))return true;
+            if(getSettings().isInEndActive() && worldName.equalsIgnoreCase("end"))return true;
+        } catch (NullPointerException ignored) {}
         return false;
     }
 }

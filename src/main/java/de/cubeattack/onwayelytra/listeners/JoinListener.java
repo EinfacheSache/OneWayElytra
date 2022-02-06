@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.Objects;
+
 public class JoinListener implements Listener {
 
     @EventHandler
@@ -20,7 +22,7 @@ public class JoinListener implements Listener {
            if(inv.getChestplate() == null){
                inv.setChestplate(ItemCreator.getElytra());
            }else{
-               if(e.getPlayer().getInventory().getChestplate().getType() != Material.ELYTRA) {
+               if(Objects.requireNonNull(e.getPlayer().getInventory().getChestplate()).getType() != Material.ELYTRA) {
                    for (int i = 0; i < 36; i++) {
                        if (inv.getItem(i) == null) {
                            inv.setItem(i, inv.getChestplate());

@@ -5,7 +5,7 @@ import de.cubeattack.onwayelytra.listeners.PlayerChangeWorld;
 import de.cubeattack.onwayelytra.listeners.PlayerInteract;
 import de.cubeattack.onwayelytra.listeners.PlayerMove;
 import de.cubeattack.onwayelytra.utils.FileUtils;
-import de.cubeattack.onwayelytra.utils.WorldSettings;
+import de.cubeattack.onwayelytra.utils.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
@@ -18,14 +18,13 @@ import java.util.UUID;
 public class OnWayElytra extends JavaPlugin {
 
     private static final HashMap<UUID, ItemStack> safeChestPlate= new HashMap<>();
-    private static final WorldSettings settings = new WorldSettings();
     private static final String PREFIX = "§7[§bCube§7] ";
 
-    private static OnWayElytra plugin;
+    private static Settings settings;
 
     @Override
     public void onLoad() {
-        plugin = this;
+        settings = new Settings();
         FileUtils.copyToFile(Objects.requireNonNull(this.getResource("config.yml")));
     }
 
@@ -45,15 +44,15 @@ public class OnWayElytra extends JavaPlugin {
         this.getLogger().fine("[OnWayElytra] Disabled successful");
     }
 
+    public static Settings getSettings() {
+        return settings;
+    }
+
     public static HashMap<UUID, ItemStack> getSafeChestPlate() {
         return safeChestPlate;
     }
 
     public static String getPREFIX() {
         return PREFIX;
-    }
-
-    public static OnWayElytra getPlugin() {
-        return plugin;
     }
 }

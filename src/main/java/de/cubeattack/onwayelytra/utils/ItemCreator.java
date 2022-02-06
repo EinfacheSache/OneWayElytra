@@ -9,11 +9,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemCreator {
     public static ItemStack getElytra(){
         ItemStack elytra = new ItemStack(Material.ELYTRA);
-
         elytra.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
         elytra.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
 
         ItemMeta elytraMeta = elytra.getItemMeta();
+        assert elytraMeta != null;
         elytraMeta.setUnbreakable(true);
         elytraMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         elytraMeta.setDisplayName("Einweg Elytra");

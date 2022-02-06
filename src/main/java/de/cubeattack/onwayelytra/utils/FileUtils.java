@@ -10,8 +10,9 @@ import java.io.InputStream;
 import static org.apache.commons.io.IOUtils.DEFAULT_BUFFER_SIZE;
 
 public class FileUtils {
-    public static File file = new File("plugins//Elytra//config.yml");
-    public static YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
+
+    private static final File file = new File("plugins//Elytra//config.yml");
+    private static final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
     public static void copyToFile(InputStream inputStream) {
         try {
@@ -28,5 +29,8 @@ public class FileUtils {
         }catch (IOException exception){
             exception.printStackTrace();
         }
+    }
+    public static YamlConfiguration getYamlConfiguration() {
+        return yamlConfiguration;
     }
 }
