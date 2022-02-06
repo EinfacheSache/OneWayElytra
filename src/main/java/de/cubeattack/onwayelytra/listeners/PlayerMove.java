@@ -2,7 +2,7 @@ package de.cubeattack.onwayelytra.listeners;
 
 import de.cubeattack.onwayelytra.OnWayElytra;
 import de.cubeattack.onwayelytra.utils.CheckLocation;
-import de.cubeattack.onwayelytra.utils.Create;
+import de.cubeattack.onwayelytra.utils.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,19 +17,19 @@ public class PlayerMove implements Listener {
         PlayerInventory inv = e.getPlayer().getInventory();
         if(CheckLocation.CheckLocation(e.getPlayer())){
             if(inv.getChestplate() == null){
-                inv.setChestplate(Create.elytra());
+                inv.setChestplate(ItemCreator.getElytra());
             }else{
                 if(e.getPlayer().getInventory().getChestplate().getType() != Material.ELYTRA) {
                     for (int i = 0; i < 36; i++) {
                         if (inv.getItem(i) == null) {
                             inv.setItem(i, inv.getChestplate());
-                            inv.setChestplate(Create.elytra());
+                            inv.setChestplate(ItemCreator.getElytra());
                             return;
                         }
                     }
                     e.getPlayer().sendMessage(OnWayElytra.PREFIX + "§4§lDa dein Inventar voll ist wurde deine Chestplate in den Zwischenspeicher gespeichert. Verlassen den Server nicht bis du deine Chestplate wieder hast!");
                     OnWayElytra.safeChestPlate.put(e.getPlayer().getUniqueId(), inv.getChestplate());
-                    inv.setChestplate(Create.elytra());
+                    inv.setChestplate(ItemCreator.getElytra());
                 }
             }
         }else{

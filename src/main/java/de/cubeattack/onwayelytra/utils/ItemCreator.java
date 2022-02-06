@@ -6,8 +6,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Create {
-    public static ItemStack elytra(){
+public class ItemCreator {
+    public static ItemStack getElytra(){
         ItemStack elytra = new ItemStack(Material.ELYTRA);
 
         elytra.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
