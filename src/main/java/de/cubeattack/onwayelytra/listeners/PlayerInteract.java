@@ -1,7 +1,7 @@
 package de.cubeattack.onwayelytra.listeners;
 
-import de.cubeattack.onwayelytra.config.Config;
 import de.cubeattack.onwayelytra.OnWayElytra;
+import de.cubeattack.onwayelytra.utils.FileUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,11 +32,11 @@ public class PlayerInteract implements Listener {
                         p.sendMessage(OnWayElytra.PREFIX + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
                         return;
                     }else if(m == Material.TRIDENT && e.getHand() == EquipmentSlot.HAND){
-                        if(Config.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
-                            if (Config.yamlConfiguration.getBoolean("Settings.World.IsSpawnSet")) {
-                                x = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.X");
-                                y = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Y");
-                                z = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Z");
+                        if(FileUtils.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
+                            if (FileUtils.yamlConfiguration.getBoolean("Settings.World.IsSpawnSet")) {
+                                x = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.X");
+                                y = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Y");
+                                z = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Z");
                                 x = x + 0.5;
                                 z = z + 0.5;
                                 Location loc = new Location(OnWayElytra.getPlugin().getServer().getWorld("world"), x, y ,z);
@@ -54,11 +54,11 @@ public class PlayerInteract implements Listener {
                         e.setCancelled(true);
                         p.sendMessage(OnWayElytra.PREFIX + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
                     }else if (m == Material.TRIDENT && e.getHand() == EquipmentSlot.OFF_HAND) {
-                        if(Config.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
-                            if (Config.yamlConfiguration.getBoolean("Settings.World.IsSpawnSet")) {
-                                x = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.X");
-                                y = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Y");
-                                z = Config.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Z");
+                        if(FileUtils.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
+                            if (FileUtils.yamlConfiguration.getBoolean("Settings.World.IsSpawnSet")) {
+                                x = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.X");
+                                y = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Y");
+                                z = FileUtils.yamlConfiguration.getDouble("Settings.World.SpawnPoint.Z");
                                 x = x + 0.5;
                                 z = z + 0.5;
                                 Location loc = new Location(OnWayElytra.getPlugin().getServer().getWorld("world"), x, y, z);

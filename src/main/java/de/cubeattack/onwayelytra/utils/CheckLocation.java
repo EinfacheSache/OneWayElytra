@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class CheckLocation {
 
-    private static final YamlConfiguration Config = de.cubeattack.onwayelytra.config.Config.yamlConfiguration;
+    private static final YamlConfiguration Config = FileUtils.yamlConfiguration;
 
     public static boolean CheckLocation(Player p){
         if(Config.getBoolean("UseWorldSpawn")) {

@@ -10,14 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
-
-import static org.apache.commons.io.IOUtils.DEFAULT_BUFFER_SIZE;
 
 public class OnWayElytra extends JavaPlugin {
 
@@ -28,11 +24,7 @@ public class OnWayElytra extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        try {
-            FileUtils.copyToFile(this.getResource("config.yml"), new File("plugins/config.yml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileUtils.copyToFile(Objects.requireNonNull(this.getResource("config.yml")));
     }
 
     @Override
