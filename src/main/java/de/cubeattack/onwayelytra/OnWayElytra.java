@@ -5,25 +5,27 @@ import de.cubeattack.onwayelytra.listeners.PlayerChangeWorld;
 import de.cubeattack.onwayelytra.listeners.PlayerInteract;
 import de.cubeattack.onwayelytra.listeners.PlayerMove;
 import de.cubeattack.onwayelytra.utils.FileUtils;
+import de.cubeattack.onwayelytra.utils.WorldSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
 public class OnWayElytra extends JavaPlugin {
 
-    public static HashMap<UUID, ItemStack> safeChestPlate= new HashMap<>();
+    private static final HashMap<UUID, ItemStack> safeChestPlate= new HashMap<>();
+    private static final WorldSettings settings = new WorldSettings();
+    private static final String PREFIX = "§7[§bCube§7] ";
 
     private static OnWayElytra plugin;
-    public static String PREFIX = "§7[§bCube§7] ";
 
     @Override
     public void onLoad() {
+        plugin = this;
         FileUtils.copyToFile(Objects.requireNonNull(this.getResource("config.yml")));
     }
 
@@ -41,6 +43,14 @@ public class OnWayElytra extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getLogger().fine("[OnWayElytra] Disabled successful");
+    }
+
+    public static HashMap<UUID, ItemStack> getSafeChestPlate() {
+        return safeChestPlate;
+    }
+
+    public static String getPREFIX() {
+        return PREFIX;
     }
 
     public static OnWayElytra getPlugin() {

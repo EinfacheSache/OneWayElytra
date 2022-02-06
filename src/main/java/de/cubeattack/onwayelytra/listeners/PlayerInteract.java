@@ -29,7 +29,7 @@ public class PlayerInteract implements Listener {
                     Material m = p.getInventory().getItemInMainHand().getType();
                     if (m == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.HAND) {
                         e.setCancelled(true);
-                        p.sendMessage(OnWayElytra.PREFIX + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+                        p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
                         return;
                     }else if(m == Material.TRIDENT && e.getHand() == EquipmentSlot.HAND){
                         if(FileUtils.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
@@ -41,7 +41,7 @@ public class PlayerInteract implements Listener {
                                 z = z + 0.5;
                                 Location loc = new Location(OnWayElytra.getPlugin().getServer().getWorld("world"), x, y ,z);
                                 p.teleport(loc);
-                                p.sendMessage(OnWayElytra.PREFIX + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+                                p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
                             }
                         }
                         return;
@@ -52,7 +52,7 @@ public class PlayerInteract implements Listener {
                     Material m = p.getInventory().getItemInOffHand().getType();
                     if (m == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.OFF_HAND) {
                         e.setCancelled(true);
-                        p.sendMessage(OnWayElytra.PREFIX + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+                        p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
                     }else if (m == Material.TRIDENT && e.getHand() == EquipmentSlot.OFF_HAND) {
                         if(FileUtils.yamlConfiguration.contains("Settings.World.IsSpawnSet")) {
                             if (FileUtils.yamlConfiguration.getBoolean("Settings.World.IsSpawnSet")) {

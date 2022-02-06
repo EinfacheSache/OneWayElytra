@@ -1,6 +1,10 @@
 UseWorldSpawn: true
+Radius: 20
+ActiveWorlds:
+  World: true
+  Nether: false
+  End: false
 SpawnLocation:
-  WorldName: world
-  x: 0
-  y: 60
-  z: 0
+  X: 0
+  Y: 60
+  Z: 0

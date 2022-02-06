@@ -1,7 +1,7 @@
 package de.cubeattack.onwayelytra.listeners;
 
 import de.cubeattack.onwayelytra.OnWayElytra;
-import de.cubeattack.onwayelytra.utils.CheckLocation;
+import de.cubeattack.onwayelytra.utils.WorldUtils;
 import de.cubeattack.onwayelytra.utils.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ public class PlayerMove implements Listener {
     @EventHandler
     public static void onPlayerMove(PlayerMoveEvent e){
         PlayerInventory inv = e.getPlayer().getInventory();
-        if(CheckLocation.CheckLocation(e.getPlayer())){
+        if(WorldUtils.CheckLocation(e.getPlayer())){
             if(inv.getChestplate() == null){
                 inv.setChestplate(ItemCreator.getElytra());
             }else{
@@ -27,8 +27,8 @@ public class PlayerMove implements Listener {
                             return;
                         }
                     }
-                    e.getPlayer().sendMessage(OnWayElytra.PREFIX + "§4§lDa dein Inventar voll ist wurde deine Chestplate in den Zwischenspeicher gespeichert. Verlassen den Server nicht bis du deine Chestplate wieder hast!");
-                    OnWayElytra.safeChestPlate.put(e.getPlayer().getUniqueId(), inv.getChestplate());
+                    e.getPlayer().sendMessage(OnWayElytra.getPREFIX() + "§4§lDa dein Inventar voll ist wurde deine Chestplate in den Zwischenspeicher gespeichert. Verlassen den Server nicht bis du deine Chestplate wieder hast!");
+                    OnWayElytra.getSafeChestPlate().put(e.getPlayer().getUniqueId(), inv.getChestplate());
                     inv.setChestplate(ItemCreator.getElytra());
                 }
             }
@@ -39,9 +39,9 @@ public class PlayerMove implements Listener {
                     if(!e.getPlayer().isGliding()){
                         if (p.getLocation().add(0.0D, -1.0D, 0.0D).getBlock().getType() != Material.AIR) {
                             p.getInventory().setChestplate(null);
-                            if(OnWayElytra.safeChestPlate.containsKey(p.getUniqueId())) {
-                                p.getInventory().setChestplate(OnWayElytra.safeChestPlate.get(p.getUniqueId()));
-                                OnWayElytra.safeChestPlate.remove(p);
+                            if(OnWayElytra.getSafeChestPlate().containsKey(p.getUniqueId())) {
+                                p.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(p.getUniqueId()));
+                                OnWayElytra.getSafeChestPlate().remove(p);
                             }
                         }
                     }

@@ -14,8 +14,8 @@ public class PlayerChangeWorld implements Listener {
         if(p.getInventory().getChestplate() == null) return;
         if(p.getInventory().getChestplate().getItemMeta().getDisplayName().contains("Einweg Elytra")){
             p.getInventory().setChestplate(null);
-            if(OnWayElytra.safeChestPlate.containsKey(p.getUniqueId())){
-                p.getInventory().setChestplate(OnWayElytra.safeChestPlate.get(p.getUniqueId()));
+            if(OnWayElytra.getSafeChestPlate().containsKey(p.getUniqueId())){
+                p.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(p.getUniqueId()));
             }
         }
     }
