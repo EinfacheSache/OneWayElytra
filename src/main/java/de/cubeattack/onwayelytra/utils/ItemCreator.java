@@ -6,15 +6,16 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Objects;
+
 public class ItemCreator {
     public static ItemStack getElytra(){
         ItemStack elytra = new ItemStack(Material.ELYTRA);
+        ItemMeta elytraMeta = elytra.getItemMeta();
         elytra.addUnsafeEnchantment(Enchantment.BINDING_CURSE, 1);
         elytra.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);
 
-        ItemMeta elytraMeta = elytra.getItemMeta();
-        assert elytraMeta != null;
-        elytraMeta.setUnbreakable(true);
+        Objects.requireNonNull(elytraMeta).setUnbreakable(true);
         elytraMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         elytraMeta.setDisplayName("Einweg Elytra");
 

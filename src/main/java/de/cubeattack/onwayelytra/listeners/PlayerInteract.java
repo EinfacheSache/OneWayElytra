@@ -1,18 +1,23 @@
 package de.cubeattack.onwayelytra.listeners;
 
 import de.cubeattack.onwayelytra.OnWayElytra;
-import org.bukkit.Location;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.WeatherType;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Objects;
-
-import static de.cubeattack.onwayelytra.OnWayElytra.getSettings;
 
 public class PlayerInteract implements Listener {
 
@@ -23,45 +28,39 @@ public class PlayerInteract implements Listener {
     @EventHandler
     public static void onPlayerInteract(PlayerInteractEvent e){
         if(e.getAction() == Action.RIGHT_CLICK_AIR){
-            Player p = e.getPlayer();
-            if(p.getInventory().getChestplate() == null) return;
-            if(Objects.requireNonNull(p.getInventory().getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
-                Material material = p.getInventory().getItemInMainHand().getType();
-                if (material == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.HAND) {
-                    e.setCancelled(true);
-                    p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
-                }else if(material == Material.TRIDENT && e.getHand() == EquipmentSlot.HAND){
-                    x = getSettings().getX();
-                    y = getSettings().getY();
-                    z = getSettings().getZ();
-                    x = x + 0.5;
-                    z = z + 0.5;
-                    Location loc = new Location(p.getWorld(), x, y ,z);
-                    p.teleport(loc);
-                    p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
-                }
-                /*
-                p.getInventory().getItemInOffHand();
-                PlayerInventory inv = e.getPlayer().getInventory();
-                Material m = p.getInventory().getItemInOffHand().getType();
-                if (m == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.OFF_HAND) {
-                    e.setCancelled(true);
-                    p.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
-                }else if (m == Material.TRIDENT && e.getHand() == EquipmentSlot.OFF_HAND) {
-                    if(FileUtils.getYamlConfiguration().contains("Settings.World.IsSpawnSet")) {
-                        if (FileUtils.getYamlConfiguration().getBoolean("Settings.World.IsSpawnSet")) {
-                            x = FileUtils.getYamlConfiguration().getDouble("Settings.World.SpawnPoint.X");
-                            y = FileUtils.getYamlConfiguration().getDouble("Settings.World.SpawnPoint.Y");
-                            z = FileUtils.getYamlConfiguration().getDouble("Settings.World.SpawnPoint.Z");
-                            x = x + 0.5;
-                            z = z + 0.5;
-                            Location loc = new Location(OnWayElytra.getPlugin().getServer().getWorld("world"), x, y, z);
-                            p.teleport(loc);
-                        }
-                    }
-                }
-                 */
+            Player player = e.getPlayer();
+            ItemStack item = e.getItem();
+            PlayerInventory playerInventory = player.getInventory();
+            Material materialInMainHand = player.getInventory().getItemInMainHand().getType();
+            Material materialInOffHand = player.getInventory().getItemInOffHand().getType();
+            if(player.getInventory().getChestplate() == null) return;
+            if(!Objects.requireNonNull(player.getInventory().getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra"))return;
+            if (materialInMainHand == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.HAND ||
+                    materialInOffHand == Material.FIREWORK_ROCKET && e.getHand() == EquipmentSlot.OFF_HAND) {
+                e.setCancelled(true);
+                player.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Raketen §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+            }else if(materialInMainHand == Material.TRIDENT && e.getHand() == EquipmentSlot.HAND){
+                playerInventory.setItemInMainHand(null);
+                blockTrident(player, item);
+            }else if (materialInOffHand == Material.TRIDENT && e.getHand() == EquipmentSlot.OFF_HAND) {
+                playerInventory.setItemInOffHand(null);
+                blockTrident(player, item);
             }
         }
+    }
+
+    private static void blockTrident(Player player, ItemStack item){
+        Bukkit.getScheduler().runTaskLater(OnWayElytra.getPlugin(), new Runnable()  {
+            @Override
+            public void run() {
+                PlayerInventory playerInventory = player.getInventory();
+                player.sendMessage(OnWayElytra.getPREFIX() + "§cDu kannst keine §4Trident §cbenutzen wenn du eine §6Einweg Elytra §cbenutzt.");
+                if (playerInventory.getItemInMainHand().getType().equals(Material.AIR)) {
+                    playerInventory.setItemInMainHand(item);
+                } else {
+                    playerInventory.setItemInOffHand(item);
+                }
+            }
+        }, 1);
     }
 }

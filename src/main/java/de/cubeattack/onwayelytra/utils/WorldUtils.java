@@ -12,20 +12,23 @@ public class WorldUtils  {
     private static final double radius = getSettings().getRadius();
 
     public static boolean CheckLocation(Player p){
+        double x;
+        double y;
+        double z;
         if(getSettings().isUseWorldSpawn()) {
             Location location = Objects.requireNonNull(p.getWorld().getSpawnLocation());
-            double x = location.getX();
-            double y = location.getY();
-            double z = location.getZ();
+            x = location.getX();
+            y = location.getY();
+            z = location.getZ();
             if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x -radius) {
                 if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z -radius) {
                     return p.getLocation().getY() >= y - radius;
                 }
             }
         }else {
-            double x = getSettings().getX();
-            double y = getSettings().getY();
-            double z = getSettings().getZ();
+            x = getSettings().getX();
+            y = getSettings().getY();
+            z = getSettings().getZ();
             if(isActiveInWorld(p.getWorld().getName())) {
                 if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x -radius) {
                     if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z - radius) {

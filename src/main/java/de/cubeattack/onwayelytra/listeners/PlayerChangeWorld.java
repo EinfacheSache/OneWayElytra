@@ -12,12 +12,12 @@ public class PlayerChangeWorld implements Listener {
 
     @EventHandler
     public static void onWorldChange(PlayerChangedWorldEvent e){
-        Player p = e.getPlayer();
-        if(p.getInventory().getChestplate() == null) return;
-        if(Objects.requireNonNull(p.getInventory().getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
-            p.getInventory().setChestplate(null);
-            if(OnWayElytra.getSafeChestPlate().containsKey(p.getUniqueId())){
-                p.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(p.getUniqueId()));
+        Player player = e.getPlayer();
+        if(player.getInventory().getChestplate() == null) return;
+        if(Objects.requireNonNull(player.getInventory().getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
+            player.getInventory().setChestplate(null);
+            if(OnWayElytra.getSafeChestPlate().containsKey(player.getUniqueId())){
+                player.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(player.getUniqueId()));
             }
         }
     }

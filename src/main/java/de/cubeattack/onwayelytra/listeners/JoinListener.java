@@ -16,23 +16,23 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public static void onJoin(PlayerJoinEvent e){
-        Player p = e.getPlayer();
-        PlayerInventory inv = p.getInventory();
-        if(WorldUtils.CheckLocation(p)){
-           if(inv.getChestplate() == null){
-               inv.setChestplate(ItemCreator.getElytra());
+        Player player = e.getPlayer();
+        PlayerInventory playerInventory = player.getInventory();
+        if(WorldUtils.CheckLocation(player)){
+           if(playerInventory.getChestplate() == null){
+               playerInventory.setChestplate(ItemCreator.getElytra());
            }else{
                if(Objects.requireNonNull(e.getPlayer().getInventory().getChestplate()).getType() != Material.ELYTRA) {
                    for (int i = 0; i < 36; i++) {
-                       if (inv.getItem(i) == null) {
-                           inv.setItem(i, inv.getChestplate());
-                           inv.setChestplate(ItemCreator.getElytra());
+                       if (playerInventory.getItem(i) == null) {
+                           playerInventory.setItem(i, playerInventory.getChestplate());
+                           playerInventory.setChestplate(ItemCreator.getElytra());
                            return;
                        }
                    }
                    e.getPlayer().sendMessage(OnWayElytra.getPREFIX() + "§4§lDa dein Inventar voll ist wurde deine Chestplate in den Zwischenspeicher gespeichert. Verlassen den Server nicht bis du deine Chestplate wieder hast!");
-                   OnWayElytra.getSafeChestPlate().put(p.getUniqueId(), inv.getChestplate());
-                   inv.setChestplate(ItemCreator.getElytra());
+                   OnWayElytra.getSafeChestPlate().put(player.getUniqueId(), playerInventory.getChestplate());
+                   playerInventory.setChestplate(ItemCreator.getElytra());
                }
            }
         }

@@ -16,7 +16,6 @@ public class ErrorHandel {
     public static void checkConfigHasError(File file) {
         YamlConfiguration config = FileUtils.getYamlConfiguration();
         Validate.notNull(file, "File cannot be null");
-
         try {
             config.load(file);
         } catch (FileNotFoundException ignored) {}

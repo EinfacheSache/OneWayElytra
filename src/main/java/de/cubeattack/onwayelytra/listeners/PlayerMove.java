@@ -16,35 +16,35 @@ public class PlayerMove implements Listener {
 
     @EventHandler
     public static void onPlayerMove(PlayerMoveEvent e){
-        PlayerInventory inv = e.getPlayer().getInventory();
+        Player player = e.getPlayer();
+        PlayerInventory playerInventory = player.getInventory();
         if(WorldUtils.CheckLocation(e.getPlayer())){
-            if(inv.getChestplate() == null){
-                inv.setChestplate(ItemCreator.getElytra());
+            if(playerInventory.getChestplate() == null){
+                playerInventory.setChestplate(ItemCreator.getElytra());
             }else{
                 if(Objects.requireNonNull(e.getPlayer().getInventory().getChestplate()).getType() != Material.ELYTRA) {
                     for (int i = 0; i < 36; i++) {
-                        if (inv.getItem(i) == null) {
-                            inv.setItem(i, inv.getChestplate());
-                            inv.setChestplate(ItemCreator.getElytra());
+                        if (playerInventory.getItem(i) == null) {
+                            playerInventory.setItem(i, playerInventory.getChestplate());
+                            playerInventory.setChestplate(ItemCreator.getElytra());
                             return;
                         }
                     }
                     e.getPlayer().sendMessage(OnWayElytra.getPREFIX() + "§4§lDa dein Inventar voll ist wurde deine Chestplate in den Zwischenspeicher gespeichert. Verlassen den Server nicht bis du deine Chestplate wieder hast!");
-                    OnWayElytra.getSafeChestPlate().put(e.getPlayer().getUniqueId(), inv.getChestplate());
-                    inv.setChestplate(ItemCreator.getElytra());
+                    OnWayElytra.getSafeChestPlate().put(e.getPlayer().getUniqueId(), playerInventory.getChestplate());
+                    playerInventory.setChestplate(ItemCreator.getElytra());
                 }
             }
         }else{
-            if(inv.getChestplate() != null){
-                if(Objects.requireNonNull(inv.getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
-                    Player p = e.getPlayer();
+            if(playerInventory.getChestplate() != null){
+                if(Objects.requireNonNull(playerInventory.getChestplate().getItemMeta()).getDisplayName().contains("Einweg Elytra")){
                     if(!e.getPlayer().isGliding()){
-                        if (p.getLocation().add(0.0D, -1.0D, 0.0D).getBlock().getType() != Material.AIR) {
-                            p.getInventory().setChestplate(null);
-                            if(OnWayElytra.getSafeChestPlate().containsKey(p.getUniqueId())) {
-                                p.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(p.getUniqueId()));
+                        if (player.getLocation().add(0.0D, -1.0D, 0.0D).getBlock().getType() != Material.AIR) {
+                            player.getInventory().setChestplate(null);
+                            if(OnWayElytra.getSafeChestPlate().containsKey(player.getUniqueId())) {
+                                player.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(player.getUniqueId()));
                                 //noinspection SuspiciousMethodCalls
-                                OnWayElytra.getSafeChestPlate().remove(p);
+                                OnWayElytra.getSafeChestPlate().remove(player);
                             }
                         }
                     }
