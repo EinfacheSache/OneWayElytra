@@ -51,7 +51,6 @@ public class ErrorHandel {
         }
         if (error.length() != 0) {
             OnWayElytra.getPlugin().getLogger().severe("Es Fehlen die Folgenden Settings in der Config: " + ChatColor.DARK_RED + error.substring(0, error.length() -2));
-            OnWayElytra.getPlugin().getLogger().severe(ChatColor.DARK_RED + "Der Server wird nun gestoppt");
         }
     }
 }
