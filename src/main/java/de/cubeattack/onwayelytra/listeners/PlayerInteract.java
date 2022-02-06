@@ -49,6 +49,6 @@ public class PlayerInteract implements Listener {
             } else {
                 playerInventory.setItemInOffHand(item);
             }
-        }, 1);
+        }, 2);
     }
 }
