@@ -1,0 +1,6 @@
+UseWorldSpawn: true
+SpawnLocation:
+  WorldName: world
+  x: 0
+  y: 60
+  z: 0
