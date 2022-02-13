@@ -43,8 +43,7 @@ public class PlayerMove implements Listener {
                             player.getInventory().setChestplate(null);
                             if(OnWayElytra.getSafeChestPlate().containsKey(player.getUniqueId())) {
                                 player.getInventory().setChestplate(OnWayElytra.getSafeChestPlate().get(player.getUniqueId()));
-                                //noinspection SuspiciousMethodCalls
-                                OnWayElytra.getSafeChestPlate().remove(player);
+                                OnWayElytra.getSafeChestPlate().remove(player.getUniqueId());
                             }
                         }
                     }

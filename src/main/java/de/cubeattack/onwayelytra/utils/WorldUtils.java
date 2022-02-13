@@ -15,26 +15,20 @@ public class WorldUtils  {
         double x;
         double y;
         double z;
+        if (!isActiveInWorld(p.getWorld().getName())) {return false;}
         if(getSettings().isUseWorldSpawn()) {
-            Location location = Objects.requireNonNull(p.getWorld().getSpawnLocation());
-            x = location.getX();
-            y = location.getY();
-            z = location.getZ();
-            if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x -radius) {
-                if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z -radius) {
-                    return p.getLocation().getY() >= y - radius;
-                }
-            }
+            Location spawnLocation = Objects.requireNonNull(p.getWorld().getSpawnLocation());
+            x = spawnLocation.getX();
+            y = spawnLocation.getY();
+            z = spawnLocation.getZ();
         }else {
             x = getSettings().getX();
             y = getSettings().getY();
             z = getSettings().getZ();
-            if(isActiveInWorld(p.getWorld().getName())) {
-                if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x -radius) {
-                    if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z - radius) {
-                        return p.getLocation().getY() >= y - radius;
-                    }
-                }
+        }
+        if (p.getLocation().getX() <= x + radius && p.getLocation().getX() >= x -radius) {
+            if (p.getLocation().getZ() <= z + radius && p.getLocation().getZ() >= z -radius) {
+                return p.getLocation().getY() >= y - radius;
             }
         }
         return false;

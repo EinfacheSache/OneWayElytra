@@ -22,9 +22,7 @@ public class FileUtils {
                     }
                 }
             }
-        }catch (IOException exception){
-            System.out.println("Test1");
-        }
+        }catch (IOException ignored){}
     }
     public static YamlConfiguration getYamlConfiguration() {
         return yamlConfiguration;
