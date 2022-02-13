@@ -1,9 +1,6 @@
 package de.cubeattack.onwayelytra;
 
-import de.cubeattack.onwayelytra.listeners.JoinListener;
-import de.cubeattack.onwayelytra.listeners.PlayerChangeWorld;
-import de.cubeattack.onwayelytra.listeners.PlayerInteract;
-import de.cubeattack.onwayelytra.listeners.PlayerMove;
+import de.cubeattack.onwayelytra.listeners.*;
 import de.cubeattack.onwayelytra.utils.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,6 +28,7 @@ public class OnWayElytra extends JavaPlugin {
     @Override
     public void onEnable() {
         PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new InventoryMove(), this);
         pluginManager.registerEvents(new JoinListener(), this);
         pluginManager.registerEvents(new PlayerMove(), this);
         pluginManager.registerEvents(new PlayerChangeWorld(), this);

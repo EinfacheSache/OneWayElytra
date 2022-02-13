@@ -3,6 +3,7 @@ package de.cubeattack.onwayelytra.listeners;
 import de.cubeattack.onwayelytra.OnWayElytra;
 import de.cubeattack.onwayelytra.utils.WorldUtils;
 import de.cubeattack.onwayelytra.utils.ItemCreator;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
