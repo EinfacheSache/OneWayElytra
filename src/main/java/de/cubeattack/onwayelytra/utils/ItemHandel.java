@@ -6,12 +6,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 
-public class ItemCreator {
+public class ItemHandel {
     public static ItemStack getElytra(){
         ItemStack elytra = new ItemStack(Material.ELYTRA);
         elytra.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1);

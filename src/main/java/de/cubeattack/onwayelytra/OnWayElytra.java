@@ -28,7 +28,6 @@ public class OnWayElytra extends JavaPlugin {
     @Override
     public void onEnable() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new InventoryMove(), this);
         pluginManager.registerEvents(new JoinListener(), this);
         pluginManager.registerEvents(new PlayerMove(), this);
         pluginManager.registerEvents(new PlayerChangeWorld(), this);
