@@ -14,7 +14,7 @@ import java.util.UUID;
 public class OnWayElytra extends JavaPlugin {
 
     private static final HashMap<UUID, ItemStack> safeChestPlate= new HashMap<>();
-    private static final String PREFIX = "§7[§bCube§7] ";
+    private static final String PREFIX = "§7[§bElytra§7] ";
 
     private static Settings settings;
     private static OnWayElytra plugin;

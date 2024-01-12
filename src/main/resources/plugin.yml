@@ -1,6 +1,6 @@
 name: OnWayElytra
 version: 1.0
 main: de.cubeattack.onwayelytra.OnWayElytra
-api-version: 1.17
+api-version: 1.20
 authors: [ CubeAttack ]
 description: Einweg Elytra 

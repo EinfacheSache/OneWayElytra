@@ -1,7 +1,6 @@
 package de.cubeattack.onwayelytra.utils;
 
 import de.cubeattack.onwayelytra.OnWayElytra;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -15,7 +14,10 @@ import java.util.logging.Level;
 public class ErrorHandel {
     public static void checkConfigHasError(File file) {
         YamlConfiguration config = FileUtils.getYamlConfiguration();
-        Validate.notNull(file, "File cannot be null");
+        if(file == null){
+            Bukkit.getLogger().log(Level.SEVERE, "File cannot be null");
+            return;
+        }
         try {
             config.load(file);
         } catch (FileNotFoundException ignored) {}
